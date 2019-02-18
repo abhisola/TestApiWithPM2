@@ -1,0 +1,117 @@
+extends layout.pug
+
+block content
+  include nav_blank.pug
+
+  .container
+    .row
+      .col-md-12
+        h1 Stores 
+        h3 All Stores are listed below
+        #racks_table
+          ul.nav.nav-tabs
+            li.active
+              a(href='#tab-1', role='tab', data-toggle='tab') Target Racks
+            li
+              a(href='#tab-2', role='tab', data-toggle='tab') Dollar Racks
+            li
+              a(href='#tab-3', role='tab', data-toggle='tab') Demo Racks
+          .tab-content
+            #tab-1.tab-pane.active(role='tabpanel')
+              .table-responsive
+                table.table.table-hover
+                  thead
+                    tr
+                      th Rack Number
+                      th Status 
+                      th Address 
+                      th Name 
+                      th Actions 
+                  tbody
+                    each rack in racks
+                      if rack.rack_type == "target"
+                        tr(class=rack.active==null?'light-warning':rack.active?'light-success':'light-danger')
+                          td=rack.racknum
+                          td=((rack.active?'Active':'Inactive') + (rack.status==null?'':': '+rack.status)) 
+                          td
+                            | #{rack.name}
+                            br
+                            | #{rack.address}
+                          td #{rack.name}
+                          td
+                            a.btn.btn-primary.btn-sm.goto_button(href='shelves/'+rack.racknum, data-toggle="tooltip", title="Shelves Stock", role='button', aria-pressed='true')
+                              i.fa.fa-area-chart
+                            a.btn.btn-primary.btn-sm.goto_button(href='traffic/'+rack.racknum, data-toggle="tooltip", title="Store Traffic" role='button', aria-pressed='true')
+                              i.fa.fa-group
+                            a.btn.btn-primary.btn-sm.goto_button(href='shelves/restock/'+rack.racknum, data-toggle="tooltip", title="Restock Analysis" role='button', aria-pressed='true')
+                              i.fa.fa-shopping-basket
+                            a.btn.btn-primary.btn-sm.goto_button(href='location/'+rack.racknum, data-toggle="tooltip", title="Rack Location" role='button', aria-pressed='true')
+                              i.fa.fa-map-marker
+                            a.btn.btn-primary.btn-sm.goto_button(href='timelapse/'+rack.racknum, data-toggle="tooltip", title="Timelapse Videos" role='button', aria-pressed='true')
+                              i.fa.fa-clock-o
+
+            #tab-2.tab-pane(role='tabpanel')
+              .table-responsive
+                table.table.table-hover
+                  thead
+                    tr
+                      th Rack Number
+                      th Status 
+                      th Address 
+                      th Name 
+                      th Actions 
+                  tbody
+                    each rack in racks
+                      if rack.rack_type == "dollar"
+                        tr(class=rack.active==null?'light-warning':rack.active?'light-success':'light-danger')
+                          td=rack.racknum
+                          td=((rack.active?'Active':'Inactive') + (rack.status==null?'':': '+rack.status)) 
+                          td
+                            | #{rack.name}
+                            br
+                            | #{rack.address}
+                          td #{rack.name}
+                          td
+                            a.btn.btn-primary.btn-sm.goto_button(href='shelves/'+rack.racknum, data-toggle="tooltip", title="Shelves Stock", role='button', aria-pressed='true')
+                              i.fa.fa-area-chart
+                            a.btn.btn-primary.btn-sm.goto_button(href='traffic/'+rack.racknum, data-toggle="tooltip", title="Store Traffic" role='button', aria-pressed='true')
+                              i.fa.fa-group
+                            a.btn.btn-primary.btn-sm.goto_button(href='shelves/restock/'+rack.racknum, data-toggle="tooltip", title="Restock Analysis" role='button', aria-pressed='true')
+                              i.fa.fa-shopping-basket
+                            a.btn.btn-primary.btn-sm.goto_button(href='location/'+rack.racknum, data-toggle="tooltip", title="Rack Location" role='button', aria-pressed='true')
+                              i.fa.fa-map-marker
+                            a.btn.btn-primary.btn-sm.goto_button(href='timelapse/'+rack.racknum, data-toggle="tooltip", title="Timelapse Videos" role='button', aria-pressed='true')
+                              i.fa.fa-clock-o
+            #tab-3.tab-pane(role='tabpanel')
+              .table-responsive
+                table.table.table-hover
+                  thead
+                    tr
+                      th Rack Number
+                      th Status 
+                      th Address 
+                      th Name 
+                      th Actions 
+                  tbody
+                    each rack in racks
+                      if rack.rack_type == "demo"
+                        tr(class=rack.active==null?'light-warning':rack.active?'light-success':'light-danger')
+                          td=rack.racknum
+                          td=((rack.active?'Active':'Inactive') + (rack.status==null?'':': '+rack.status)) 
+                          td
+                            | #{rack.name}
+                            br
+                            | #{rack.address}
+                          td #{rack.name}
+                          td
+                            a.btn.btn-primary.btn-sm.goto_button(href='shelves/'+rack.racknum, data-toggle="tooltip", title="Shelves Stock", role='button', aria-pressed='true')
+                              i.fa.fa-area-chart
+                            a.btn.btn-primary.btn-sm.goto_button(href='traffic/'+rack.racknum, data-toggle="tooltip", title="Store Traffic" role='button', aria-pressed='true')
+                              i.fa.fa-group
+                            a.btn.btn-primary.btn-sm.goto_button(href='shelves/restock/'+rack.racknum, data-toggle="tooltip", title="Restock Analysis" role='button', aria-pressed='true')
+                              i.fa.fa-shopping-basket
+                            a.btn.btn-primary.btn-sm.goto_button(href='location/'+rack.racknum, data-toggle="tooltip", title="Rack Location" role='button', aria-pressed='true')
+                              i.fa.fa-map-marker
+                            a.btn.btn-primary.btn-sm.goto_button(href='timelapse/'+rack.racknum, data-toggle="tooltip", title="Timelapse Videos" role='button', aria-pressed='true')
+                              i.fa.fa-clock-o
+          

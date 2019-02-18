@@ -1,0 +1,72 @@
+extends layout.pug
+
+block content
+    include nav.pug
+    .container
+      if success
+        .row
+          .col-md-12
+            h1
+              | Foot Traffic For #{rackname}
+              span#store_address #{' ('+address})
+            h3
+              | To view audience select a date range below. 
+              a#info
+                i.fa.fa-info-circle
+            #details
+              p  
+              p  
+            h3
+              | *All times are in 
+              span.text-danger CST 
+              |  timezone.
+        #rack_types.row
+          .col-lg-12.col-lg-offset-0.col-md-12
+            div
+              form.form-inline
+                  input#rackNum(type='hidden', value=racknum)
+                  span#from_date.text-danger From 
+                  input#startDate.big(type='date', value='2019-02-01')
+                  span#to_date.text-danger To 
+                  input#endDate.big(type='date', value='2019-02-01')
+                  a#date_range_button.btn.btn-primary(role='button') View 
+                  .fa.fa-gear.fa-2x.fa-spin
+        #shelf_stock_row.row
+          .col-md-12
+            .traffic-title
+              h2 People Count and Dwell Time
+          .col-md-12
+            .shelves_chart_nodata
+              h1.text-center.text-muted No Data Found
+          .traffic_chart.col-md-12
+            .row
+              .col-md-3
+                .traffic-box
+                  h2#counter 560 
+                  h4 People Count
+              .col-md-3
+                .traffic-box
+                  h2#avgTime 20 
+                  h4 Dwell Time
+        .shelf_stock_row.row
+          .col-md-12
+            .traffic-title
+              h2 Dwell Time (in seconds)
+          .traffic_chart.col-md-12
+            canvas#dateRangeChart
+          .col-md-12
+            .shelves_chart_nodata
+              h1.text-center.text-muted No Data Found To Display Chart
+        .shelf_stock_row.row
+          .col-md-12
+            .traffic-title
+              h2 Foot Traffic Count Hourly
+          .traffic_chart.col-md-12
+            canvas#dateRangeHourlyChart
+          .col-md-12
+            .shelves_chart_nodata
+              h1.text-center.text-muted No Data Found To Display Chart
+      else 
+        h1="We are sorry, "+msg        
+block append scripts
+  script(src='/js/traffic_page.js')

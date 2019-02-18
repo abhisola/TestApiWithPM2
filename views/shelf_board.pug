@@ -1,0 +1,51 @@
+extends layout.pug
+block content
+  - var n = 0;
+  include nav.pug
+  .container
+    if success
+      .row
+        .col-md-12
+          h1
+            | Shelf Report For #{rackname}
+            span#store_address #{' ('+address}) 
+          h3
+            | To start your visit select a date range below. 
+            a#info
+              i.fa.fa-info-circle
+          #details
+            p
+              | Cameras on of each shelf of the Smart Rack take photos several times a day and then analyzed by an algorithm to count the number of triangles visible. These counts are expressed as a % full in the chart for each shelf.
+            p
+              | Photos from intervals from the time period selected are displayed below each shelf.
+          h3
+            | *All times are in  
+            span.text-danger #{timezone} 
+            |  timezone.
+      #rack_types.row
+        .col-lg-12.col-lg-offset-0.col-md-12
+          div
+            form.form-inline
+              input#rackNum(type='hidden', value=racknum)
+              span#from_date.text-danger From 
+              input#startDate.big(type='date', value='2019-02-01')
+              span#to_date.text-danger To 
+              input#endDate.big(type='date', value='2019-02-01')
+              a#date_range_button.btn.btn-primary View 
+              .fa.fa-gear.fa-2x.fa-spin
+      while n < shelf_count
+        div(id='shelf'+n, class='row shelf_stock_row')
+          .col-md-12
+            h2
+              | Shelf #{n+1}
+              //- span.text-info - Pringles Saur Cream And Onion 
+          .stock_chart.col-md-12
+              canvas(id='chart'+n,style='width:100%;height:200px;')
+          .col-md-12
+            .shelves_chart_nodata
+              h1.text-center.text-muted No Data Found To Display Chart
+        - n++
+    else 
+      h1="We are sorry, "+msg    
+block append scripts
+  script(src='/js/shelves_page.js')

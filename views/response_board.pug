@@ -1,0 +1,82 @@
+extends layout.pug
+block content
+    - var n = 1;
+    include nav_blank.pug
+    .container
+      .row
+        .col-md-12
+          h1 Response Dashboard
+          h3
+            | To start your response investigation select a date range below. 
+            a#info
+              i.fa.fa-info-circle
+          #details
+            p  
+            p  
+          h3
+            | *All times are in 
+            span.text-danger CST 
+            |  timezone.
+      #rack_types.row
+        .col-lg-12.col-lg-offset-0.col-md-12
+          div
+            span#from_date.text-danger From 
+            input#startDate.big(type='date', value='2019-02-01')
+            span#to_date.text-danger To 
+            input#endDate.big(type='date', value='2019-02-01')
+            span#to_date.text-danger Was 
+            input#percent.big(type='number', placeholder='Empty Percent', value='60')
+            span#to_date.text-danger % Empty For
+            input#hours.big(type='number', placeholder='Hours Empty', value='6')
+            span#to_date.text-danger Hours 
+            a#date_range_button.btn.btn-primary(role='button') View 
+            .fa.fa-gear.fa-2x.fa-spin
+      .row
+        .col-md-12
+          #racks_table
+            ul.nav.nav-tabs
+              li.active
+                a(href='#tab-1', role='tab', data-toggle='tab') Target Racs
+              li
+                a(href='#tab-2', role='tab', data-toggle='tab') Dollar Racks
+              li
+                a(href='#tab-3', role='tab', data-toggle='tab') Demo Racks
+            .tab-content
+              #tab-1.tab-pane.active(role='tabpanel')
+                each rack in racks
+                  if(rack.rack_type == "target")
+                    div(id='rack'+n, class='row shelf_stock_row')
+                      h3
+                        | #{rack.name} 
+                        span#store_address (#{rack.address})
+                      .response_chart.col-md-12
+                        canvas(id='chart'+rack.racknum,style='width:100%;height:150px;')
+                      .col-md-12
+                        .shelves_chart_nodata
+                          h1.text-center.text-muted No Data Found To Display Chart
+              #tab-2.tab-pane(role='tabpanel')
+                each rack in racks
+                  if(rack.rack_type == "dollar")
+                    div(id='rack'+n, class='row shelf_stock_row')
+                      h3
+                        | #{rack.name} 
+                        span#store_address (#{rack.address})
+                      .response_chart.col-md-12
+                        canvas(id='chart'+rack.racknum,style='width:100%;height:150px;')
+                      .col-md-12
+                        .shelves_chart_nodata
+                          h1.text-center.text-muted No Data Found To Display Chart
+              #tab-3.tab-pane(role='tabpanel')
+                each rack in racks
+                  if(rack.rack_type == "demo")
+                    div(id='rack'+n, class='row shelf_stock_row')
+                      h3
+                        | #{rack.name} 
+                        span#store_address (#{rack.address})
+                      .response_chart.col-md-12
+                        canvas(id='chart'+rack.racknum,style='width:100%;height:200px;')
+                      .col-md-12
+                        .shelves_chart_nodata
+                          h1.text-center.text-muted No Data Found To Display Chart
+block append scripts
+  script(src='/js/response_page.js')
