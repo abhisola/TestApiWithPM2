@@ -1,10 +1,10 @@
 module.exports = {
   apps : [{
     name: 'API',
-    script: './bin/www',
+    script: './app.js',//'./bin/www',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
-    //args: 'one two',
+    args: '--optimize_for_size --max_old_space_size=460 --gc_interval=100',
     instances: "max", // was one
     autorestart: true,
     watch: false,
