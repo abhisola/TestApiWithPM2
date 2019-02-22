@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "preinstall": "npm install pm2 -g",
-    "start": "pm2-runtime start ecosystem.config.js --env production"
+
+    "start": "node --optimize_for_size --max_old_space_size=460 ./app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -22,6 +22,7 @@
     "pug-mailer": "^1.0.1",
     "redis": "^2.8.0",
     "shelljs": "^0.8.1",
-    "status": "0.0.13"
+    "status": "0.0.13",
+    "throng": "^4.0.0"
   }
 }

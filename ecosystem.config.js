@@ -16,7 +16,9 @@ module.exports = {
       NODE_ENV: 'production'
     }
   }],
-  deploy : {
+  deploy : {}
+
+  /*deploy : {
     production : {
       user : 'node',
       host : '212.83.163.1',
@@ -25,5 +27,5 @@ module.exports = {
       path : '/var/www/production',
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     }
-  }
+  }*/
 };
