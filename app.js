@@ -2,7 +2,7 @@
     //"preinstall": "npm install pm2 -g",
     //"start": "pm2-runtime start ecosystem.config.js --env production"
 
-var WORKERS = 3;
+var WORKERS = process.env.WEB_CONCURRENCY || 1;;
 const throng = require('throng');
 
 throng({
